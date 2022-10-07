@@ -1,4 +1,7 @@
+using EMagazine.Application.Behaviors;
 using EMagazine.Infrastructure.Persistence;
+using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +17,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>                   
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
+
+//builder.Services.AddMediatR(typeof());
+
+/*builder.Services.AddValidatorsFromAssembly(typeof(GetAllBooksHandler).GetTypeInfo().Assembly,
+    includeInternalTypes: true);*/
+
+builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
 var app = builder.Build();
 
