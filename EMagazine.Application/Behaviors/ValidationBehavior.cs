@@ -58,6 +58,7 @@ namespace EMagazine.Application.Behaviors
                 .Invoke(null, new object?[] { errors })!;
 
             return (TResult)validationResult;
+
         }
     }
 }
